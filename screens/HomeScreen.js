@@ -1,5 +1,11 @@
-import { View, Text, Platform, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Platform,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -7,9 +13,13 @@ import {
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
 import { styles } from "../theme";
+import TrendingMovies from "../components/trendingMovies";
 
 const ios = Platform.OS == "ios";
+
 export default function HomeScreen() {
+  const [trending, setTrending] = useState([1, 2, 3]);
+
   return (
     <>
       <View className="flex-1 bg-neutral-800">
@@ -19,13 +29,20 @@ export default function HomeScreen() {
           <View className="flex-row justify-between items-center mx-4">
             <Bars3BottomLeftIcon size="30" strokeWidth={2} color="white" />
             <Text className="text-white text-3xl font-bold">
-              <Text style={styles}>M</Text> ovies
+              <Text style={styles.text}>M</Text>ovies
             </Text>
             <TouchableOpacity>
               <MagnifyingGlassIcon color="white" size="30" strokeWidth={2} />
             </TouchableOpacity>
           </View>
         </SafeAreaView>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 10 }}
+        >
+          {/* trending movies  */}
+          <TrendingMovies data={trending} />
+        </ScrollView>
       </View>
     </>
   );
