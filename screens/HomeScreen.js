@@ -1,8 +1,12 @@
-import { View, Text, Platform } from "react-native";
+import { View, Text, Platform, TouchableOpacity } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { Bars3BottomLeftIcon } from "react-native-heroicons/outline";
+import {
+  Bars3BottomLeftIcon,
+  MagnifyingGlassIcon,
+} from "react-native-heroicons/outline";
+import { styles } from "../theme";
 
 const ios = Platform.OS == "ios";
 export default function HomeScreen() {
@@ -14,7 +18,12 @@ export default function HomeScreen() {
           <StatusBar style="light" />
           <View className="flex-row justify-between items-center mx-4">
             <Bars3BottomLeftIcon size="30" strokeWidth={2} color="white" />
-            <Text className="text-white text-3xl font-bold">Movies</Text>
+            <Text className="text-white text-3xl font-bold">
+              <Text style={styles}>M</Text> ovies
+            </Text>
+            <TouchableOpacity>
+              <MagnifyingGlassIcon color="white" size="30" strokeWidth={2} />
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       </View>
