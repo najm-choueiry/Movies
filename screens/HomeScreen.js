@@ -18,7 +18,7 @@ import TrendingMovies from "../components/trendingMovies";
 const ios = Platform.OS == "ios";
 
 export default function HomeScreen() {
-  const [trending, setTrending] = useState([1, 2, 3]);
+  const [trending, setTrending] = useState([1, 2, 3, 4]);
 
   return (
     <>
