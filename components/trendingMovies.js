@@ -1,7 +1,9 @@
-import { View, Text, TouchableWithoutFeedback } from "react-native";
+import { View, Text, TouchableWithoutFeedback, Dimensions } from "react-native";
 import React from "react";
 
 import Carousel from "react-native-snap-carousel";
+
+var { width, height } = Dimensions.get("window");
 
 export default function TrendingMovies({ data }) {
   if (!data) {
@@ -27,7 +29,7 @@ export default function TrendingMovies({ data }) {
 const MovieCard = ({ item }) => {
   return (
     <TouchableWithoutFeedback>
-      <Text className="text-white"> Movie</Text>
+      <Image source={require("../assets/images/mo")} />
     </TouchableWithoutFeedback>
   );
 };
