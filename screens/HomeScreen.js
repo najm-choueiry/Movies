@@ -14,11 +14,15 @@ import {
 } from "react-native-heroicons/outline";
 import { styles } from "../theme";
 import TrendingMovies from "../components/trendingMovies";
+import MovieList from "../components/movieList";
 
 const ios = Platform.OS == "ios";
 
 export default function HomeScreen() {
   const [trending, setTrending] = useState([1, 2, 3, 4]);
+
+  const [upcoming, setUpcoming] = useState([]);
+  const [topRated, setTopRated] = useState([]);
 
   return (
     <>
@@ -42,6 +46,9 @@ export default function HomeScreen() {
         >
           {/* trending movies  */}
           <TrendingMovies data={trending} />
+
+          {/* upcoming movies row */}
+          <MovieList title="Upcoming" data={upcoming} />
         </ScrollView>
       </View>
     </>
