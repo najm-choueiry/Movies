@@ -15,7 +15,10 @@ var { width, height } = Dimensions.get("window");
 
 export default function MovieList({ title }) {
   const navigation = useNavigation();
+
   const data = [1, 2, 3, 4, 5, 6];
+  const movieName = "Big Bang theory";
+
   return (
     <View className="mb-8 space-y-4">
       <View className="mx-4 flex-row justify-between items-center">
@@ -43,7 +46,9 @@ export default function MovieList({ title }) {
                   className="rounded-3xl"
                   style={{ width: width * 0.33, height: height * 0.22 }}
                 />
-                <Text className="text-neutral-300 ml-1">name</Text>
+                <Text className="text-neutral-300 ml-1">
+                  {movieName.length > 14 && movieName.slice(0, 14) + "..."}
+                </Text>
               </View>
             </TouchableWithoutFeedback>
           );
