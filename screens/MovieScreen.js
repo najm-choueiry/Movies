@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Platform,
+  Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -15,7 +16,7 @@ import { styles, theme } from "../theme";
 
 var { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
-const topMargin = ios ? "absolute" : "mt-3";
+const topMargin = ios ? "absolute" : "absolute mt-3";
 
 export default function MovieScreen() {
   const { params: item } = useRoute();
@@ -35,6 +36,12 @@ export default function MovieScreen() {
     >
       {/* back button and movie poster */}
       <View className="w-full ">
+        <View>
+          <Image
+            source={require("../assets/images/moviePoster2.png")}
+            style={{ width, height: height * 0.65 }}
+          />
+        </View>
         <SafeAreaView
           className={`z-20 w-full flex-row justify-between items-center px-4 ${topMargin}`}
         >
@@ -45,6 +52,7 @@ export default function MovieScreen() {
           >
             <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
           </TouchableOpacity>
+
           <TouchableOpacity onPress={() => toggleFavorite(!isFavorite)}>
             <HeartIcon
               size="35"
