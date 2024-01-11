@@ -14,6 +14,7 @@ import { ChevronLeftIcon } from "react-native-heroicons/outline";
 import { HeartIcon } from "react-native-heroicons/solid";
 import { styles, theme } from "../theme";
 import { LinearGradient } from "expo-linear-gradient";
+import Cast from "../components/cast";
 
 var { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
@@ -26,6 +27,8 @@ export default function MovieScreen() {
   const navigation = useNavigation();
 
   const [isFavorite, toggleFavorite] = useState(false);
+
+  const [cast, setCast] = useState([1, 2, 3, 4, 5, 6]);
 
   useEffect(() => {
     // call movie
@@ -104,6 +107,8 @@ export default function MovieScreen() {
           lorem loran lorem lorem lorem loran lorem lorem lorem loran lorem
         </Text>
       </View>
+
+      <Cast cast={cast} />
     </ScrollView>
   );
 }
