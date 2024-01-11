@@ -18,6 +18,7 @@ import { LinearGradient } from "expo-linear-gradient";
 var { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
 const topMargin = ios ? "absolute mt-3" : "absolute mt-3";
+const movieName = "The Big Bang Therory";
 
 export default function MovieScreen() {
   const { params: item } = useRoute();
@@ -72,7 +73,36 @@ export default function MovieScreen() {
 
       {/* movie details */}
       <View style={{ marginTop: -height * 0.09 }} className="space-y-3">
-        <Text className="text-white text-center text-3xl font-bold tracking-wider"></Text>
+        <Text className="text-white text-center text-3xl font-bold tracking-wider">
+          {movieName}
+        </Text>
+
+        <Text className="text-neutral-400 font-semibold text-base text-center">
+          Released • 2020 • 180 mins
+        </Text>
+
+        {/* genres */}
+        <View className="flex-row justify-center mx-4 space-x-2">
+          <Text className="text-neutral-400 font-semibold text-base text-center">
+            Action •
+          </Text>
+          <Text className="text-neutral-400 font-semibold text-base text-center">
+            Thrill •
+          </Text>
+          <Text className="text-neutral-400 font-semibold text-base text-center">
+            Comedy •
+          </Text>
+        </View>
+
+        {/* description */}
+        <Text className="text-neutral-400 mx-4 tracking-wide">
+          loran lorem lorem lorem loran lorem lorem lorem loran lorem lorem
+          lorem loran lorem lorem lorem loran lorem lorem lorem loran lorem
+          lorem lorem loran lorem lorem lorem loran lorem lorem lorem loran
+          lorem lorem lorem loran lorem lorem lorem loran lorem lorem lorem
+          loran lorem lorem lorem loran lorem lorem lorem loran lorem lorem
+          lorem loran lorem lorem lorem loran lorem lorem lorem loran lorem
+        </Text>
       </View>
     </ScrollView>
   );
