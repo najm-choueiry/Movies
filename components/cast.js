@@ -3,7 +3,7 @@ import React from "react";
 const personName = "Keanu Reeves";
 const characterName = "John Wickkkkkkkkk";
 
-export default function Cast({ cast }) {
+export default function Cast({ cast, navigation }) {
   return (
     <View className="my-6">
       <Text className="text-white text-lg mx-4 mb-5">Top Cast</Text>
@@ -16,7 +16,11 @@ export default function Cast({ cast }) {
         {cast &&
           cast.map((person, index) => {
             return (
-              <TouchableOpacity className="mr-4 items-center" key={index}>
+              <TouchableOpacity
+                className="mr-4 items-center"
+                key={index}
+                onPress={() => navigation.navigate("Person", person)}
+              >
                 <View className="overflow-hidden rounded-full h-20 w-20 items-center border border-neutral-500">
                   <Image
                     className="rounded-2xl h-24 w-20"
