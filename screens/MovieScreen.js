@@ -93,7 +93,7 @@ export default function MovieScreen() {
             Thrill •
           </Text>
           <Text className="text-neutral-400 font-semibold text-base text-center">
-            Comedy •
+            Comedy
           </Text>
         </View>
 
