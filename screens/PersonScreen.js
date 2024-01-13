@@ -14,6 +14,7 @@ import { HeartIcon } from "react-native-heroicons/solid";
 
 import { styles } from "../theme";
 import { useNavigation } from "@react-navigation/native";
+import MovieList from "../components/movieList";
 
 var { width, height } = Dimensions.get("window");
 
@@ -25,6 +26,7 @@ export default function PersonScreen() {
 
   const navigation = useNavigation();
 
+  const [personMovies, setPersonMovies] = useState([1, 2, 3, 4, 5]);
   return (
     <ScrollView
       className="flex-1 bg-neutral-900"
@@ -98,6 +100,28 @@ export default function PersonScreen() {
             <Text className="text-neutral-300 text-sm">64.23</Text>
           </View>
         </View>
+
+        {/* bio */}
+        <View className="my-6 mx-4 space-y-2">
+          <Text className="text-white text-lg"> Biography</Text>
+          <Text className="text-neutral-400 tracking-wide">
+            Lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem
+          </Text>
+        </View>
+
+        {/* movies of character*/}
+
+        <MovieList data={personMovies} title="Movies" hideSeeAll={true} />
       </View>
     </ScrollView>
   );
