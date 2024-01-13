@@ -68,6 +68,36 @@ export default function PersonScreen() {
             />
           </View>
         </View>
+        <View className="mt-6">
+          <Text className="text-3xl text-white font-bold text-center">
+            Keanu Reeves
+          </Text>
+          <Text className="text-base text-neutral-500 text-center">
+            London, UK
+          </Text>
+        </View>
+
+        <View className="mx-3 mt-6 flex-row justify-between items-center bg-neutral-700 rounded-full p-4">
+          <View className="border-r-2 border-r-neutral-400 px-2 items-center">
+            <Text className="text-white font-semibold">Gender</Text>
+            <Text className="text-neutral-300 text-sm">Male</Text>
+          </View>
+
+          <View className="border-r-2 border-r-neutral-400 px-2 items-center">
+            <Text className="text-white font-semibold">Birthday</Text>
+            <Text className="text-neutral-300 text-sm">1964-09-02</Text>
+          </View>
+
+          <View className="border-r-2 border-r-neutral-400 px-2 items-center">
+            <Text className="text-white font-semibold">Known for</Text>
+            <Text className="text-neutral-300 text-sm">Acting</Text>
+          </View>
+
+          <View className="px-2 items-center">
+            <Text className="text-white font-semibold">Popularity</Text>
+            <Text className="text-neutral-300 text-sm">64.23</Text>
+          </View>
+        </View>
       </View>
     </ScrollView>
   );
