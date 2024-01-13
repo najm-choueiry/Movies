@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 
 var { width, height } = Dimensions.get("window");
 
-export default function MovieList({ title }) {
+export default function MovieList({ title, hideSeeAll, data: datatemp }) {
   const navigation = useNavigation();
 
   const data = [1, 2, 3, 4, 5, 6];
@@ -23,11 +23,13 @@ export default function MovieList({ title }) {
     <View className="mb-8 space-y-4">
       <View className="mx-4 flex-row justify-between items-center">
         <Text className="text-white text-xl">{title}</Text>
-        <TouchableOpacity>
-          <Text style={styles.text} className="text-lg">
-            See All
-          </Text>
-        </TouchableOpacity>
+        {!hideSeeAll && (
+          <TouchableOpacity>
+            <Text style={styles.text} className="text-lg">
+              See All
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
       <ScrollView
         horizontal
@@ -38,7 +40,7 @@ export default function MovieList({ title }) {
           return (
             <TouchableWithoutFeedback
               key={index}
-              onPress={() => navigation.navigate("Movie", item)}
+              onPress={() => navigation.push("Movie", item)}
             >
               <View className="space-y-1 mr-4">
                 <Image
