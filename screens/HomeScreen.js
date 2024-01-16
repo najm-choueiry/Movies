@@ -16,6 +16,7 @@ import { styles } from "../theme";
 import TrendingMovies from "../components/trendingMovies";
 import MovieList from "../components/movieList";
 import { useNavigation } from "@react-navigation/native";
+import Loading from "../components/loading";
 
 const ios = Platform.OS == "ios";
 
@@ -27,7 +28,7 @@ export default function HomeScreen() {
 
   const navigation = useNavigation();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -45,19 +46,24 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 10 }}
-        >
-          {/* trending movies  */}
-          <TrendingMovies data={trending} />
 
-          {/* upcoming movies row */}
-          <MovieList title="Upcoming" data={upcoming} />
+        {loading ? (
+          <Loading />
+        ) : (
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 10 }}
+          >
+            {/* trending movies  */}
+            <TrendingMovies data={trending} />
 
-          {/* top rated movies row */}
-          <MovieList title="Top Rated" data={topRated} />
-        </ScrollView>
+            {/* upcoming movies row */}
+            <MovieList title="Upcoming" data={upcoming} />
+
+            {/* top rated movies row */}
+            <MovieList title="Top Rated" data={topRated} />
+          </ScrollView>
+        )}
       </View>
     </>
   );
