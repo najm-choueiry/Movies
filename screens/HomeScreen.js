@@ -27,6 +27,8 @@ export default function HomeScreen() {
 
   const navigation = useNavigation();
 
+  const [loading, setLoading] = useState(true);
+
   return (
     <>
       <View className="flex-1 bg-neutral-800">
