@@ -5,8 +5,9 @@ import {
   TextInput,
   Platform,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { XMarkIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
@@ -18,6 +19,13 @@ const TopMargin = ios ? " " : "mt-2";
 
 export default function SearchScreen() {
   const navigation = useNavigation();
+  const [results, setResults] = useState([1, 2, 3, 4, 5]);
+
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    searchInputRef.current.focus();
+  }, []);
 
   return (
     <SafeAreaView className="bg-neutral-800 flex-1">
@@ -28,6 +36,7 @@ export default function SearchScreen() {
           placeholder="Search Movie"
           placeholderTextColor={"lightgray"}
           className={`pb-1 pl-6 flex-1 text-base font-semibold text-white tracking-wider`}
+          ref={searchInputRef}
         />
         <TouchableOpacity
           onPress={() => navigation.navigate("Home")}
@@ -36,6 +45,17 @@ export default function SearchScreen() {
           <XMarkIcon size="25" color="white" />
         </TouchableOpacity>
       </View>
+
+      {/* results */}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        className="space-y-3"
+      >
+        <Text className="text-white font-semibold ml-1">
+          Results {results.length}
+        </Text>
+      </ScrollView>
     </SafeAreaView>
   );
 }
