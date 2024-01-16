@@ -6,6 +6,8 @@ import {
   Platform,
   TouchableOpacity,
   ScrollView,
+  TouchableWithoutFeedback,
+  Image,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -55,6 +57,24 @@ export default function SearchScreen() {
         <Text className="text-white font-semibold ml-1">
           Results {results.length}
         </Text>
+        <View className="flex-row justify-between flex-wrap">
+          {results.map((item, index) => {
+            return (
+              <TouchableWithoutFeedback
+                key={index}
+                onPress={() => navigation.push("Movie", item)}
+              >
+                <View className="space-y-2 mb-4">
+                  <Image
+                    className="rounded-3xl"
+                    source={require("../assets/images/moviePoster2.png")}
+                    style={{ width: width * 0.44, height: height * 0.3 }}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            );
+          })}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
