@@ -13,6 +13,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { XMarkIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
+import Loading from "../components/loading";
 
 var { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
@@ -24,14 +25,21 @@ const movieName = "Big Bang theoryyyyyyyyyyyyyyy";
 export default function SearchScreen() {
   const navigation = useNavigation();
   const [results, setResults] = useState([1, 2, 3, 4, 5]);
+  const [loading, setLoading] = useState(false);
 
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    searchInputRef.current.focus();
+    if (!loading) {
+      searchInputRef.current.focus();
+    }
   }, []);
 
-  return (
+  return loading ? (
+    <View className="flex-1 bg-neutral-900">
+      <Loading />
+    </View>
+  ) : (
     <SafeAreaView className="bg-neutral-800 flex-1">
       <View
         className={`mx-4 mb-3 flex-row justify-between items-center border border-neutral-500 rounded-full ${TopMargin}`}

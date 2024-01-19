@@ -33,7 +33,7 @@ export default function MovieScreen() {
   const [cast, setCast] = useState([1, 2, 3, 4, 5, 6]);
 
   const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4, 5, 6]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // call movie

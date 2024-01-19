@@ -15,6 +15,7 @@ import { HeartIcon } from "react-native-heroicons/solid";
 import { styles } from "../theme";
 import { useNavigation } from "@react-navigation/native";
 import MovieList from "../components/movieList";
+import Loading from "../components/loading";
 
 var { width, height } = Dimensions.get("window");
 
@@ -23,11 +24,16 @@ const verticalMargin = ios ? "w-11/12 ml-4" : "mt-14 mb-4  w-full";
 
 export default function PersonScreen() {
   const [isFavorite, toggleFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
 
   const [personMovies, setPersonMovies] = useState([1, 2, 3, 4, 5]);
-  return (
+  return loading ? (
+    <View className="flex-1 bg-neutral-900">
+      <Loading />
+    </View>
+  ) : (
     <ScrollView
       className="flex-1 bg-neutral-900"
       contentContainerStyle={{ paddingBottom: 20 }}
@@ -50,6 +56,7 @@ export default function PersonScreen() {
       </SafeAreaView>
 
       {/* person details */}
+
       <View>
         <View
           className="flex-row justify-center"
