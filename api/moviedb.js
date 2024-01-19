@@ -7,13 +7,25 @@ const trendingMoviesEndpoint = `${apiBaseUrl}/trending/movie/day?api_key=${apiKe
 const upcomingMoviesEndpoint = `${apiBaseUrl}/movie/upcoming?api_key=${apiKey}`;
 const topRatedMoviesEndpoint = `${apiBaseUrl}/movie/top_rated?api_key=${apiKey}`;
 
-const options = {
-  method: "GET",
-  url,
-  params: { language: "en-US" },
-  headers: {
+const apiCall = async (endpoint, params) => {
+  const options = {
+    method: "GET",
+    url: endpoint,
+    params: params ? params : {},  
+  };
+
+  try {
+    const response = await axios.request(options);
+    return response.data
+  }catch(error){
+    console.log(error)
+    return {}
+  }
+
+};
+
+headers: {
     accept: "application/json",
     Authorization:
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OTYzNWJiOGQzZWJlNzcwZjY1ZWY4YmM2NjdkNTg2YyIsInN1YiI6IjY1YWE1M2JlZDk1NDIwMDBjZjIxNGM0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.j15QvefIJo6m97XOHylxfoUstqLaSENwljVLEKvqXw0",
   },
-};
