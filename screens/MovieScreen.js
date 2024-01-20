@@ -17,6 +17,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Cast from "../components/cast";
 import MovieList from "../components/movieList";
 import Loading from "../components/loading";
+import { fallbackMoviePoster } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
@@ -30,9 +31,9 @@ export default function MovieScreen() {
 
   const [isFavorite, toggleFavorite] = useState(false);
 
-  const [cast, setCast] = useState([1, 2, 3, 4, 5, 6]);
+  const [cast, setCast] = useState([]);
 
-  const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4, 5, 6]);
+  const [similarMovies, setSimilarMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export default function MovieScreen() {
         <View className="w-full ">
           <View>
             <Image
-              source={require("../assets/images/moviePoster2.png")}
+              source={{ uri: fallbackMoviePoster }}
               style={{ width, height: height * 0.65 }}
             />
             <LinearGradient

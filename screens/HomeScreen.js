@@ -26,7 +26,7 @@ import {
 const ios = Platform.OS == "ios";
 
 export default function HomeScreen() {
-  const [trending, setTrending] = useState([1, 2, 3, 4]);
+  const [trending, setTrending] = useState([]);
 
   const [upcoming, setUpcoming] = useState([]);
   const [topRated, setTopRated] = useState([]);
