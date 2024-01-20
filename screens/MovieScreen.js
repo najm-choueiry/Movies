@@ -106,22 +106,26 @@ export default function MovieScreen() {
             {movie?.original_title}
           </Text>
 
-          <Text className="text-neutral-400 font-semibold text-base text-center">
-            {movie?.status} • {movie?.release_date?.split("-")[0]} •{" "}
-            {movie?.runtime} min
-          </Text>
+          {movie?.id ? (
+            <Text className="text-neutral-400 font-semibold text-base text-center">
+              {movie?.status} • {movie?.release_date?.split("-")[0]} •{" "}
+              {movie?.runtime} min
+            </Text>
+          ) : null}
 
           {/* genres */}
           <View className="flex-row justify-center mx-4 space-x-2">
-            <Text className="text-neutral-400 font-semibold text-base text-center">
-              Action •
-            </Text>
-            <Text className="text-neutral-400 font-semibold text-base text-center">
-              Thrill •
-            </Text>
-            <Text className="text-neutral-400 font-semibold text-base text-center">
-              Comedy
-            </Text>
+            {movie?.genres?.map((genre, index) => {
+              let showDot = index + 1 != movie.genres.length;
+              return (
+                <Text
+                  key={index}
+                  className="text-neutral-400 font-semibold text-base text-center"
+                >
+                  {genre?.name} {showDot ? "• " : null}
+                </Text>
+              );
+            })}
           </View>
 
           {/* description */}
