@@ -9,22 +9,22 @@ import {
   TouchableWithoutFeedback,
   Image,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { XMarkIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import Loading from "../components/loading";
+import { debounce } from "lodash";
+import { fallbackMoviePoster, searchMovies } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
 
 const TopMargin = ios ? " " : "mt-2";
 
-const movieName = "Big Bang theoryyyyyyyyyyyyyyy";
-
 export default function SearchScreen() {
   const navigation = useNavigation();
-  const [results, setResults] = useState([1, 2, 3, 4, 5]);
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const searchInputRef = useRef(null);
@@ -34,6 +34,26 @@ export default function SearchScreen() {
       searchInputRef.current.focus();
     }
   }, []);
+
+  const handleSearch = (value) => {
+    if (value && value.length > 2) {
+      setLoading(true);
+      searchMovies({
+        query: value,
+        include_adult: "false",
+        language: "en-US",
+        page: "1",
+      }).then((data) => {
+        setLoading(false);
+        if (data && data.results) setResults(data.results);
+      });
+    } else {
+      setLoading(false);
+      setResults([]);
+    }
+  };
+
+  const handleTextDebounce = useCallback(debounce(handleSearch, 400), []);
 
   return loading ? (
     <View className="flex-1 bg-neutral-900">
@@ -45,6 +65,7 @@ export default function SearchScreen() {
         className={`mx-4 mb-3 flex-row justify-between items-center border border-neutral-500 rounded-full ${TopMargin}`}
       >
         <TextInput
+          onChangeText={handleTextDebounce}
           placeholder="Search Movie"
           placeholderTextColor={"lightgray"}
           className={`pb-1 pl-6 flex-1 text-base font-semibold text-white tracking-wider`}
@@ -85,13 +106,15 @@ export default function SearchScreen() {
                   <View className="space-y-2 mb-4">
                     <Image
                       className="rounded-3xl"
-                      source={require("../assets/images/moviePoster2.png")}
+                      source={{
+                        uri: image185(item?.poster_path) || fallbackMoviePoster,
+                      }}
                       style={{ width: width * 0.44, height: height * 0.3 }}
                     />
                     <Text className="text-neutral-300 ml-1">
-                      {movieName.length > 22
-                        ? movieName.slice(0, 22) + "..."
-                        : movieName}
+                      {item?.title?.length > 22
+                        ? item?.title.slice(0, 22) + "..."
+                        : item?.title}
                     </Text>
                   </View>
                 </TouchableWithoutFeedback>
