@@ -16,6 +16,12 @@ import { styles } from "../theme";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import MovieList from "../components/movieList";
 import Loading from "../components/loading";
+import {
+  fallbackPersonImage,
+  fetchPersonDetails,
+  fetchPersonMovies,
+  image342,
+} from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 
@@ -30,11 +36,23 @@ export default function PersonScreen() {
 
   const navigation = useNavigation();
 
-  const [personMovies, setPersonMovies] = useState([1, 2, 3, 4, 5]);
+  const [person, setPerson] = useState([]);
+
+  const [personMovies, setPersonMovies] = useState([]);
 
   useEffect(() => {
     setLoading(true);
+    getPersonDetails(item.id);
   }, [item]);
+
+  const getPersonDetails = async (id) => {
+    const data = await fetchPersonDetails(id);
+    if (data) setPerson(data);
+    setLoading(false);
+  };
+  // const getPersonDetails = async (id) => {
+  //   const data = await fetchPersonMovies(id);
+  // };
 
   return loading ? (
     <View className="flex-1 bg-neutral-900">
@@ -79,7 +97,9 @@ export default function PersonScreen() {
         "
           >
             <Image
-              source={require("../assets/images/castImage2.png")}
+              source={{
+                uri: image342(person.profile_path) || fallbackPersonImage,
+              }}
               style={{ height: height * 0.43, width: width * 0.74 }}
             />
           </View>
