@@ -29,7 +29,7 @@ export default function HomeScreen() {
 
   const navigation = useNavigation();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getTrendingMovies();
@@ -39,6 +39,7 @@ export default function HomeScreen() {
     const data = await fetchTrendingMovies();
     // console.log(data);
     if (data && data.results) setTrending(data.results);
+    setLoading(false);
   };
 
   return (
@@ -66,7 +67,7 @@ export default function HomeScreen() {
             contentContainerStyle={{ paddingBottom: 10 }}
           >
             {/* trending movies  */}
-            <TrendingMovies data={trending} />
+            {trending.length > 0 && <TrendingMovies data={trending} />}
 
             {/* upcoming movies row */}
             <MovieList title="Upcoming" data={upcoming} />
