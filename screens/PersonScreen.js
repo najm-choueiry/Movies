@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronLeftIcon } from "react-native-heroicons/outline";
 import { HeartIcon } from "react-native-heroicons/solid";
 
 import { styles } from "../theme";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import MovieList from "../components/movieList";
 import Loading from "../components/loading";
 
@@ -23,12 +23,19 @@ const ios = Platform.OS == "ios";
 const verticalMargin = ios ? "w-11/12 ml-4" : "mt-14 mb-4  w-full";
 
 export default function PersonScreen() {
+  const { params: item } = useRoute();
+
   const [isFavorite, toggleFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
 
   const [personMovies, setPersonMovies] = useState([1, 2, 3, 4, 5]);
+
+  useEffect(() => {
+    setLoading(true);
+  }, [item]);
+
   return loading ? (
     <View className="flex-1 bg-neutral-900">
       <Loading />
