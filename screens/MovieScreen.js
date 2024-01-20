@@ -17,7 +17,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import Cast from "../components/cast";
 import MovieList from "../components/movieList";
 import Loading from "../components/loading";
-import { fallbackMoviePoster } from "../api/moviedb";
+import {
+  fallbackMoviePoster,
+  fetchMovieDetails,
+  image500,
+} from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
@@ -36,7 +40,18 @@ export default function MovieScreen() {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {}, [item]);
+  const [movie, setMovie] = useState({});
+  useEffect(() => {
+    setLoading(true);
+    getMovieDetails(item.id);
+  }, [item]);
+
+  const getMovieDetails = async (id) => {
+    const data = await fetchMovieDetails(id);
+    if (data) setMovie(data);
+    setLoading(false);
+    console.log("data****** ", data);
+  };
 
   return loading ? (
     <View className="flex-1 bg-neutral-900">
@@ -53,7 +68,9 @@ export default function MovieScreen() {
         <View className="w-full ">
           <View>
             <Image
-              source={{ uri: fallbackMoviePoster }}
+              source={{
+                uri: image500(movie?.poster_path) || fallbackMoviePoster,
+              }}
               style={{ width, height: height * 0.65 }}
             />
             <LinearGradient
@@ -86,11 +103,12 @@ export default function MovieScreen() {
 
         <View style={{ marginTop: -height * 0.09 }} className="space-y-3">
           <Text className="text-white text-center text-3xl font-bold tracking-wider">
-            {movieName}
+            {movie?.original_title}
           </Text>
 
           <Text className="text-neutral-400 font-semibold text-base text-center">
-            Released • 2020 • 180 mins
+            {movie?.status} • {movie?.release_date?.split("-")[0]} •{" "}
+            {movie?.runtime} min
           </Text>
 
           {/* genres */}

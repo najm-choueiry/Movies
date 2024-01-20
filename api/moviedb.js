@@ -11,11 +11,11 @@ const topRatedMoviesEndpoint = `${apiBaseUrl}/movie/top_rated?api_key=${apiKey}`
 
 // ------------------------------------ Movie Screen PATHS
 const movieDetailsEndpoint = (id) =>
-  `${apiBaseUrl}/moive/${id}?api_key=${apiKey}`;
+  `${apiBaseUrl}/movie/${id}?api_key=${apiKey}`;
 const movieCreditsEndpoint = (id) =>
-  `${apiBaseUrl}/moive/${id}/credits?api_key=${apiKey}`;
+  `${apiBaseUrl}/movie/${id}/credits?api_key=${apiKey}`;
 const similarMoviesEndpoint = (id) =>
-  `${apiBaseUrl}/moive/${id}/similar?api_key=${apiKey}`;
+  `${apiBaseUrl}/movie/${id}/similar?api_key=${apiKey}`;
 
 // ------------------------------------ fetching the images (depending on their widths)
 export const image500 = (path) =>
