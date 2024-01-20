@@ -36,9 +36,7 @@ export default function MovieScreen() {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // call movie
-  }, [item]);
+  useEffect(() => {}, [item]);
 
   return loading ? (
     <View className="flex-1 bg-neutral-900">
