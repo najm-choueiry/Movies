@@ -19,6 +19,7 @@ import MovieList from "../components/movieList";
 import Loading from "../components/loading";
 import {
   fallbackMoviePoster,
+  fetchMovieCredits,
   fetchMovieDetails,
   image500,
 } from "../api/moviedb";
@@ -44,13 +45,18 @@ export default function MovieScreen() {
   useEffect(() => {
     setLoading(true);
     getMovieDetails(item.id);
+    getMovieCredits(item.id);
   }, [item]);
 
   const getMovieDetails = async (id) => {
     const data = await fetchMovieDetails(id);
     if (data) setMovie(data);
     setLoading(false);
-    console.log("data****** ", data);
+  };
+
+  const getMovieCredits = async (id) => {
+    const data = await fetchMovieCredits(id);
+    if (data && data.cast) setCast(data.cast);
   };
 
   return loading ? (
@@ -130,12 +136,7 @@ export default function MovieScreen() {
 
           {/* description */}
           <Text className="text-neutral-400 mx-4 tracking-wide">
-            loran lorem lorem lorem loran lorem lorem lorem loran lorem lorem
-            lorem loran lorem lorem lorem loran lorem lorem lorem loran lorem
-            lorem lorem loran lorem lorem lorem loran lorem lorem lorem loran
-            lorem lorem lorem loran lorem lorem lorem loran lorem lorem lorem
-            loran lorem lorem lorem loran lorem lorem lorem loran lorem lorem
-            lorem loran lorem lorem lorem loran lorem lorem lorem loran lorem
+            {movie?.overview}
           </Text>
         </View>
 
