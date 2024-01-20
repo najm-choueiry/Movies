@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -17,6 +17,7 @@ import TrendingMovies from "../components/trendingMovies";
 import MovieList from "../components/movieList";
 import { useNavigation } from "@react-navigation/native";
 import Loading from "../components/loading";
+import { fetchTrendingMovies } from "../api/moviedb";
 
 const ios = Platform.OS == "ios";
 
@@ -29,6 +30,16 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getTrendingMovies();
+  }, []);
+
+  const getTrendingMovies = async () => {
+    const data = await fetchTrendingMovies();
+    // console.log(data);
+    if (data && data.results) setTrending(data.results);
+  };
 
   return (
     <>

@@ -12,6 +12,11 @@ const apiCall = async (endpoint, params) => {
     method: "GET",
     url: endpoint,
     params: params ? params : {},
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OTYzNWJiOGQzZWJlNzcwZjY1ZWY4YmM2NjdkNTg2YyIsInN1YiI6IjY1YWE1M2JlZDk1NDIwMDBjZjIxNGM0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.j15QvefIJo6m97XOHylxfoUstqLaSENwljVLEKvqXw0",
+    },
   };
 
   try {
