@@ -36,13 +36,14 @@ export default function PersonScreen() {
 
   const navigation = useNavigation();
 
-  const [person, setPerson] = useState([]);
+  const [person, setPerson] = useState({});
 
   const [personMovies, setPersonMovies] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     getPersonDetails(item.id);
+    getPersonMovies(item.id);
   }, [item]);
 
   const getPersonDetails = async (id) => {
@@ -50,9 +51,11 @@ export default function PersonScreen() {
     if (data) setPerson(data);
     setLoading(false);
   };
-  // const getPersonDetails = async (id) => {
-  //   const data = await fetchPersonMovies(id);
-  // };
+
+  const getPersonMovies = async (id) => {
+    const data = await fetchPersonMovies(id);
+    if (data) setPersonMovies(data.cast);
+  };
 
   return loading ? (
     <View className="flex-1 bg-neutral-900">
@@ -147,17 +150,7 @@ export default function PersonScreen() {
         <View className="my-6 mx-4 space-y-2">
           <Text className="text-white text-lg"> Biography</Text>
           <Text className="text-neutral-400 tracking-wide">
-            Lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem
+            {person?.biography || "N/A"}
           </Text>
         </View>
 
