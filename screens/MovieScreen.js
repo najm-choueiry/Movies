@@ -21,6 +21,7 @@ import {
   fallbackMoviePoster,
   fetchMovieCredits,
   fetchMovieDetails,
+  fetchSimilarMovies,
   image500,
 } from "../api/moviedb";
 
@@ -46,6 +47,7 @@ export default function MovieScreen() {
     setLoading(true);
     getMovieDetails(item.id);
     getMovieCredits(item.id);
+    getSimilarMovies(item.id);
   }, [item]);
 
   const getMovieDetails = async (id) => {
@@ -57,6 +59,11 @@ export default function MovieScreen() {
   const getMovieCredits = async (id) => {
     const data = await fetchMovieCredits(id);
     if (data && data.cast) setCast(data.cast);
+  };
+
+  const getSimilarMovies = async (id) => {
+    const data = await fetchSimilarMovies(id);
+    if (data && data.results) setSimilarMovies(data.results);
   };
 
   return loading ? (
